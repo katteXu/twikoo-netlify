@@ -12,5 +12,7 @@ exports.handler = async function (...args) {
     return { statusCode: 200, headers };
   }
   // 调用twikoo-netlify的handler函数
-  return handler(...args);
+  const result = await handler(...args);
+  result.headers = { ...headers, ...result.headers };
+  return result;
 };
