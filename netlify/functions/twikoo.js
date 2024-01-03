@@ -10,9 +10,10 @@ exports.handler = async function (...args) {
   };
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers };
+  } else {
+    // 调用twikoo-netlify的handler函数
+    const result = await handler(...args);
+    result.headers = { ...headers, ...result.headers };
+    return result;
   }
-  // 调用twikoo-netlify的handler函数
-  const result = await handler(...args);
-  result.headers = { ...headers, ...result.headers };
-  return result;
 };
