@@ -13,7 +13,7 @@ exports.handler = async function (...args) {
   } else {
     // 调用twikoo-netlify的handler函数
     const result = await handler(...args);
-    result.headers = { ...headers, ...result.headers };
+    result.headers = { ...result.headers, ...headers };
     return result;
   }
 };
